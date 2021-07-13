@@ -20,10 +20,10 @@ jobs:
       TITLE: ${{ github.event.issue.title }}
       NUMBER: ${{ github.event.issue.number }}
       URL: ${{ github.event.issue.html_url }}
-      #LIST: 607e0b1b0fb8813ef34d468e #Issues list
-      LIST: 60e6d5a1bf51de23c0490f1a #Testing list
+      LIST: 607e0b1b0fb8813ef34d468e #Issues list
+      #LIST: 60e6d5a1bf51de23c0490f1a #Testing list
       DESC: ${{ github.event.issue.body}}
-      #LABEL: 6078af083315ab67b7d21f2c
+      LABEL: 6078af083315ab67b7d21f2c
       COM_URL: ${{ github.event.issue.comments_url }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
