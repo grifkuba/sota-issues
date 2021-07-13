@@ -1,0 +1,29 @@
+name: CloseIssueToTrello
+
+# Controls when the workflow will run
+on: 
+  issues:
+    types: closed
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  create:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.TRELLO_TOKEN }}
+      KEY: ${{ secrets.TRELLO_KEY }}
+      #LIST: 5ed59a8058386e77cbe05b91 #Review list 
+      #LIST: 5ed59a833ced5f33f27a7d70 #Completed list 
+      LIST: 60e97d69924ed0242a84897b #Testing list
+      NUMBER: ${{ github.event.issue.number }}
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Runs a set of commands using the runners shell
+      - uses: actions/checkout@v2
+      - name: review trello card
+        run: |
+          data="pos=bottom&dueComplete=true&idList=$LIST&token=$TOKEN&key=$KEY"
+          card_id=`cat .github/card_ids/issue-"$NUMBER".txt`
+          curl --request PUT -s -o /dev/null -d $data https://api.trello.com/1/cards/$card_id
